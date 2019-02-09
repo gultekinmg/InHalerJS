@@ -17,7 +17,7 @@ function myEMBED(){
 		Embed.PARA(id_SPAN+1,id_PARA+1,"Mr Blue has a blue house and a blue car."); 
 	///
 	Embed.HTML(id_PARENT_DIV,"plugin_content.html"); /// Embed.HTML(_idPARENT, Attribute_html); CROSS REFERENCE
-	Embed.SCRIPTSRC("plugin_content.js"); /// Embed.SCRIPTSRC(_Specify); LINKS A JSFILE, AND IT WORKS IMMEDIATELY.
+	//Embed.SCRIPTSRC("plugin_content.js"); /// Embed.SCRIPTSRC(_Specify); LINKS A JSFILE, AND IT WORKS IMMEDIATELY.
 	Embed.SCRIPT(id_PARENT_DIV,'content.js',code); ///  Embed.SCRIPT(_idPARENT,_idnode,CODE); EMBED CODE INTO PAGE.WORKS ALSO, DO SMALL.
 	/// YOU CAN INSERT CODE ALSO FROM JSFILE. BUT WHO CARES WHILE LINKING SOURCE WORKS. IF NO NEED PUBLICVARS.
 	Embed.DIV(id_PARENT_DIV,id_DIV+1);
@@ -62,3 +62,33 @@ function myREVIZE(){
 
 myEMBED();
 
+function myReplace(idNode) {
+	var str = Embed.NODE(idNode).textContent;  //console.log(str);
+	var res1 = str.replace(/blue/gi, "red fucking");
+	var res2 = res1.replace(/red|house|car/gi, function (x) { return x.toUpperCase(); });
+	Embed.NODE(idNode).textContent="(replaced by _plugin_content.js): "+res2;
+}
+myReplace(id_PARA+2);
+
+///
+dragElement(document.getElementById("themeMENU"));
+function dragElement(elmnt) {
+	var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+	if (document.getElementById(elmnt.id + "header")) {
+	document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;/* if present, the header is where you move the DIV from:*/
+	} else {elmnt.onmousedown = dragMouseDown;}/* otherwise, move the DIV from anywhere inside the DIV:*/
+	function dragMouseDown(e) {e = e || window.event; e.preventDefault(); 
+		pos3 = e.clientX;pos4 = e.clientY;// get the mouse cursor position at startup:
+		document.onmouseup = closeDragElement;
+		document.onmousemove = elementDrag;    // call a function whenever the cursor moves:
+	}
+	function elementDrag(e) {e = e || window.event; e.preventDefault();    
+		pos1 = pos3 - e.clientX; pos2 = pos4 - e.clientY; pos3 = e.clientX; pos4 = e.clientY;// calculate the new cursor position:
+		elmnt.style.top = (elmnt.offsetTop - pos2) + "px"; elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";// set the element's new position:
+	}
+	function closeDragElement() {/* stop moving when mouse button is released:*/
+		document.onmouseup = null;
+		document.onmousemove = null;
+	}
+}
+///

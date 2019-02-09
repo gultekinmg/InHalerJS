@@ -84,7 +84,7 @@ var Embed=(function(){  'use strict';
   }
 
 	function _new_SCRIPT_src(_Specify){var script = document.createElement("script");							//create _new_SCRIPT SOURCE
-		script.type = "text/javascript";
+		//script.type = "text/javascript";
 		script.src = _Specify; //alert(_Specify);
 		document.getElementsByTagName("head")[0].appendChild(script);
 		//return false;
