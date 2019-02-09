@@ -1,0 +1,23 @@
+{
+  "name": "Injecta",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "Injecting stuff",
+  "homepage_url": "http://danharper.me",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_title": "Inject!"
+  },
+	"content_scripts": [{ 
+		"run_at" :"document_end",
+		"matches": ["https://*/*", "http://*/*"],
+		"js": ["EmbNODE.js","embedcontents.js"]
+	}
+	],
+  "permissions": ["https://*/*", "http://*/*", "tabs" ]
+}
