@@ -1,4 +1,5 @@
 # _EmbNODE.js jslibrary for html node inserts
+ex: Embed.HTML('_plugin_content',"./_plugin_content.html");
 
 [demo]https://gultekinmg.github.io/GuiltyKing/embed/ | Injects HTML nodes(all html elements) to parent from external source 
 
