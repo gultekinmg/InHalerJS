@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html><head><title>InHaler Embed-Test</title></head>
+	<style>	#EMBEDEN_MODULES {position:absolute; top:50px;width: 555px;background-color:gold;}</style>
+  <script src="./INHALER.js"></script>
+<body>
+	<script type="text/javascript">
+		var Parent_DIV_ID='EMBEDEN_MODULES'; var DIV_ID= "+DIV"; var FORM_ID="+form"; var INPUT_ID="+FILEinput";
+		var P_ID='+P', SPAN_ID='+SPAN', id_UL='+UL', id_LI='+LI', BUTTON_ID='+BTN';
+		function prePage(){
+			NEW('SCRIPT','','parentwindow','var ParentPAGE;'); // B4 Inserting xHtml Into Parent, Tell Window This Is Parent
+			///NEW(Node_Type, Parent_ID, Node_ID, CODE/Content, HTML, order, replaced); 
+			NEW("DIV","",Parent_DIV_ID,"embed modules here parent is document.body");
+			NEW("BUTTON",Parent_DIV_ID,BUTTON_ID+1,"Start embed"); /// BUTTON(_idPARENT,_idnode);
+				ATTR(BUTTON_ID+1,"onclick","Embeding_HTMLandMODULEs()");
+				ATTR(BUTTON_ID+1,"style","position:top:200px;");
+			NEW("DIV",Parent_DIV_ID, DIV_ID+1,"txt",'<small>This content@div('+DIV_ID+')@('+Parent_DIV_ID+')</small>test');	
+				NEW("span",DIV_ID+1,SPAN_ID+2,"span"); /// $(SPAN_ID+2).textContent = "rvzspan.textContent from attribute.";
+					NEW("P",SPAN_ID+2,P_ID+2,"span.P ==>Mr Blue has a blue house and a blue car.");
+					
+				NEW("span",DIV_ID+1,SPAN_ID+1);
+					NEW("UL",SPAN_ID+1,id_UL+1); ATTR(id_UL+1,"style","position:relative; left:100px;");
+						NEW("LI",id_UL+1,id_LI+1,"1LI.textContent");
+						NEW("LI",id_UL+1,id_LI+2,"2LI.textContent");
+						NEW("LI",id_UL+1,id_LI+3,"3LI.textContent replaced with 1","","",id_LI+1);
+						NEW("LI",id_UL+1,id_LI+4,"4LI.textContent inserted top of childs","",0); 
+		}
+		prePage();
+		function myrevize(){SIZE('FIRST',200,200);ATTR("FIRST","style","position:relative;top:10px; left:30px;"); DEL("catResizeBttn");};
+		function cat(){ DEL("cat");
+			NEW("img",xHTML_ID,'FIRST'); ATTR('FIRST',"src","./400px-Cat_silhouette.svg.png"); ATTR('FIRST',"type","PNG");
+			NEW("BUTTON",xHTML_ID,"catResizeBttn","resize image"); 
+			ATTR("catResizeBttn","onclick","myrevize()"); ATTR("catResizeBttn","style","position:relative;");
+		}
+		var CallBACK= function(){
+			NEW("div",Parent_DIV_ID,DIV_ID+2); 	
+				NEW("BUTTON",DIV_ID+2,"cat","load cat image"); ATTR("cat","onclick","cat()"); ATTR("cat","style","top:200px;");
+		}
+		var xHTML_ID="NewDIVtoEmbedHTML";
+		function Embeding_HTMLandMODULEs(){ var URL="Inhale_xHTML.html", CallBackFunc="CallBACK";
+			DEL(BUTTON_ID+1); 
+			var inhalen=xHTML(Parent_DIV_ID,xHTML_ID,URL,CallBackFunc); // if CROSS reference attr is cors file
+			JSS('Inhale_Script_replace.js'); // imports JSFILE and use.
+			//JSS('Inhale_Script_drag.js'); /// instead captured from xhtml..no need to use extensively:)
+			if(inhalen) CallBACK(); /// when embedden cross file do whatever... //console.log("inhalen");
+		}
+	</script>
+</body>
+</html>
